@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import './animations.css';
+import ParticleBackground from './components/ParticleBackground';
 
 function App() {
   const currentUser = "Dhie-boop";
@@ -8,6 +9,8 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isScrolled, setIsScrolled] = useState(false);
+  const [cursorVariant, setCursorVariant] = useState('default');
+  const cursorRef = useRef(null);
 
   useEffect(() => {
     if (darkMode) {
@@ -20,6 +23,24 @@ function App() {
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      
+      // Add magnetic effect to buttons
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(button => {
+        const rect = button.getBoundingClientRect();
+        const buttonCenterX = rect.left + rect.width / 2;
+        const buttonCenterY = rect.top + rect.height / 2;
+        const distance = Math.hypot(e.clientX - buttonCenterX, e.clientY - buttonCenterY);
+        
+        if (distance < 100) {
+          const angle = Math.atan2(e.clientY - buttonCenterY, e.clientX - buttonCenterX);
+          const force = (100 - distance) / 10;
+          button.style.transform = `translate(${Math.cos(angle) * force}px, ${Math.sin(angle) * force}px)`;
+          setCursorVariant('hover');
+        } else {
+          button.style.transform = 'translate(0, 0)';
+        }
+      });
     };
 
     const handleScroll = () => {
@@ -61,28 +82,10 @@ function App() {
 
   return (
     <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
-      <div className="background-elements">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="floating-element"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 100 + 20}px`,
-              height: `${Math.random() * 100 + 20}px`,
-              background: `linear-gradient(45deg, 
-                rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1),
-                rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1))`,
-              animationDelay: `${Math.random() * 5}s`,
-              transform: `rotate(${Math.random() * 360}deg)`
-            }}
-          />
-        ))}
-      </div>
-
+      <ParticleBackground darkMode={darkMode} />
       <div 
-        className="cursor-glow" 
+        ref={cursorRef}
+        className={`cursor-glow ${cursorVariant}`} 
         style={{ 
           left: mousePosition.x, 
           top: mousePosition.y 
