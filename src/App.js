@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
+import './animations.css';
 
 function App() {
   const currentUser = "Dhie-boop";
   const formattedDate = "2025-05-30 16:17:10";
-  
   const [darkMode, setDarkMode] = useState(false);
-  
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark-mode');
@@ -15,6 +16,33 @@ function App() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   // Toggle dark mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -22,38 +50,10 @@ function App() {
 
   return (
     <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
-      {/* Navigation */}
-      <nav className="navbar">
-        <div className="logo">Portfolio<span className="highlight">.</span></div>
-        <div className="meta-info">
-          {formattedDate} | {currentUser}
-        </div>
-        <div className="nav-links">
-          <a href="#home" className="active">Home</a>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-          <button onClick={toggleDarkMode} className="theme-toggle">
-            {darkMode ? '☀️' : '🌙'}
-          </button>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section id="home" className="hero-section">
-        <div className="hero-content">
-          <div className="small-text">Hello, I am</div>
-          <h1>Dhie-boop<span className="highlight">.</span></h1>
-          <h2>Full Stack Developer</h2>
-          <p>I build exceptional digital experiences with Python and React</p>
-          <div className="cta-buttons">
-            <a href="#projects" className="btn primary-btn">View My Work</a>
-            <a href="#contact" className="btn secondary-btn">Contact Me</a>
-          </div>
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <span className="stat-number">3+</span>
+      <div className="background-elements">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
               <span className="stat-text">Years<br/>Experience</span>
             </div>
             <div className="hero-stat">
