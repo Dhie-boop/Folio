@@ -7,6 +7,7 @@ function App() {
   const formattedDate = "2025-05-30 16:17:10";
   const [darkMode, setDarkMode] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     if (darkMode) {
@@ -20,8 +21,18 @@ function App() {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -60,12 +71,23 @@ function App() {
               top: `${Math.random() * 100}%`,
               width: `${Math.random() * 100 + 20}px`,
               height: `${Math.random() * 100 + 20}px`,
-              background: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1)`,
-              animationDelay: `${Math.random() * 5}s`
+              background: `linear-gradient(45deg, 
+                rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1),
+                rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1))`,
+              animationDelay: `${Math.random() * 5}s`,
+              transform: `rotate(${Math.random() * 360}deg)`
             }}
           />
         ))}
       </div>
+
+      <div 
+        className="cursor-glow" 
+        style={{ 
+          left: mousePosition.x, 
+          top: mousePosition.y 
+        }}
+      />
 
       {/* Navigation */}
       <nav className="navbar">
