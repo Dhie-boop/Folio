@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import './animations.css';
 import ParticleBackground from './components/ParticleBackground';
+import { TodoAppSVG, BlogApiSVG, EcommerceSVG } from './components/ProjectIllustrations';
 
 function App() {
   const currentUser = "Dhie-boop";
@@ -251,59 +252,59 @@ function App() {
           <h2>Projects<span className="highlight">.</span></h2>
         </div>
         <div className="projects-grid">
-          <div className="project-card">
+          <div className="project-card glass-card">
             <div className="project-image">
-              <img src="https://cdn.dribbble.com/userupload/7725384/file/original-656581e096df46dcc2c8f904cd9b1055.png?compress=1&resize=1024x768" alt="Todo App" />
+              <TodoAppSVG />
             </div>
             <h3>Advanced Todo Application</h3>
             <p>A feature-rich task management application with categories, priorities, and filtering options.</p>
             <div className="project-tags">
-              <span>React</span>
-              <span>CSS</span>
-              <span>LocalStorage</span>
+              <span className="skill-tag">React</span>
+              <span className="skill-tag">CSS</span>
+              <span className="skill-tag">LocalStorage</span>
             </div>
             <div className="project-links">
-              <a href="#" className="btn small-btn">Live Demo</a>
-              <a href="#" className="btn small-btn secondary-btn">Source Code</a>
+              <a href="#" className="btn btn-interactive small-btn">Live Demo</a>
+              <a href="#" className="btn btn-interactive small-btn secondary-btn">Source Code</a>
             </div>
           </div>
           
-          <div className="project-card">
+          <div className="project-card glass-card">
             <div className="project-image">
-              <img src="https://cdn.dribbble.com/userupload/8150239/file/original-2438dfc3e223e5361db0f1b8a75a9a9e.png?compress=1&resize=1024x768" alt="Blog API" />
+              <BlogApiSVG />
             </div>
             <h3>Blog API Platform</h3>
             <p>A robust RESTful API for content management with user authentication and media handling.</p>
             <div className="project-tags">
-              <span>Python</span>
-              <span>FastAPI</span>
-              <span>PostgreSQL</span>
+              <span className="skill-tag">Python</span>
+              <span className="skill-tag">FastAPI</span>
+              <span className="skill-tag">PostgreSQL</span>
             </div>
             <div className="project-links">
-              <a href="#" className="btn small-btn">Documentation</a>
-              <a href="#" className="btn small-btn secondary-btn">Source Code</a>
+              <a href="#" className="btn btn-interactive small-btn">Documentation</a>
+              <a href="#" className="btn btn-interactive small-btn secondary-btn">Source Code</a>
             </div>
           </div>
           
-          <div className="project-card">
+          <div className="project-card glass-card">
             <div className="project-image">
-              <img src="https://cdn.dribbble.com/userupload/8444023/file/original-c73af7bd6e09a7aaf5828854fe6846af.png?compress=1&resize=1024x768" alt="E-Commerce" />
+              <EcommerceSVG />
             </div>
             <h3>E-Commerce Platform</h3>
             <p>A complete online shopping solution with product management, cart functionality, and payment gateway integration.</p>
             <div className="project-tags">
-              <span>Django</span>
-              <span>React</span>
-              <span>Stripe</span>
+              <span className="skill-tag">Django</span>
+              <span className="skill-tag">React</span>
+              <span className="skill-tag">Stripe</span>
             </div>
             <div className="project-links">
-              <a href="#" className="btn small-btn">Live Demo</a>
-              <a href="#" className="btn small-btn secondary-btn">Source Code</a>
+              <a href="#" className="btn btn-interactive small-btn">Live Demo</a>
+              <a href="#" className="btn btn-interactive small-btn secondary-btn">Source Code</a>
             </div>
           </div>
         </div>
         <div className="more-projects">
-          <a href="#" className="btn secondary-btn">View All Projects</a>
+          <a href="#" className="btn btn-interactive secondary-btn">View All Projects</a>
         </div>
       </section>
 
