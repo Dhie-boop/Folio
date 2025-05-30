@@ -495,6 +495,16 @@ ul {
   transform: scale(1.05);
 }
 
+.project-image svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .project-image svg {
+  transform: scale(1.05);
+}
+
 .project-card h3 {
   margin: 25px 25px 10px;
   font-size: 22px;
@@ -846,4 +856,46 @@ footer {
   .nav-links {
     flex-wrap: wrap;
   }
+}
+
+.project-image svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .project-image svg {
+  transform: scale(1.05);
+}
+
+.dark-mode .project-image svg rect,
+.dark-mode .project-image svg path {
+  filter: brightness(0.8) saturate(1.2);
+}
+
+/* Enhanced Project Cards */
+.project-card.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.project-card.glass-card:hover {
+  transform: translateY(-10px) rotate3d(1, 1, 0, 5deg);
+}
+
+.skill-tag {
+  background: rgba(83, 100, 255, 0.1);
+  border: 1px solid rgba(83, 100, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(83, 100, 255, 0.2);
 }
