@@ -54,6 +54,51 @@ function App() {
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
+            className="floating-element"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 100 + 20}px`,
+              height: `${Math.random() * 100 + 20}px`,
+              background: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1)`,
+              animationDelay: `${Math.random() * 5}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Navigation */}
+      <nav className="navbar">
+        <div className="logo">Portfolio<span className="highlight">.</span></div>
+        <div className="meta-info">
+          {formattedDate} | {currentUser}
+        </div>
+        <div className="nav-links">
+          <a href="#home" className="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <button onClick={toggleDarkMode} className="theme-toggle">
+            {darkMode ? '☀️' : '🌙'}
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="hero-section">
+        <div className="hero-content">
+          <div className="small-text">Hello, I am</div>
+          <h1>Dhie-boop<span className="highlight">.</span></h1>
+          <h2>Full Stack Developer</h2>
+          <p>I build exceptional digital experiences with Python and React</p>
+          <div className="cta-buttons">
+            <a href="#projects" className="btn primary-btn">View My Work</a>
+            <a href="#contact" className="btn secondary-btn">Contact Me</a>
+          </div>
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <span className="stat-number">3+</span>
               <span className="stat-text">Years<br/>Experience</span>
             </div>
             <div className="hero-stat">
