@@ -341,7 +341,7 @@ function App() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Shows Contact Section */}
       <section id="contact" className="contact-section">
         <div className="section-header">
           <span className="section-subtitle">Get In Touch</span>
